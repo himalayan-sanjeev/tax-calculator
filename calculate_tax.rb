@@ -1,13 +1,12 @@
 class TaxCalculator
   attr_reader :income, :premium
 
-  def initialize(income, premium, status)
+  def initialize(income, premium)
     @income = income
     @premium = premium
-    @status = status
   end
 
-  def calculate_tax(income, premium, status)
+  def calculate_tax(status)
     taxable = income - premium
 
     case status
