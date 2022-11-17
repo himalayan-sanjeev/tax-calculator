@@ -8,59 +8,44 @@ class TaxCalculator
 
   def calculate_tax(status)
     taxable = income - premium
-
+    
     case status
-
     when "married"
+      base_tax = 0.01 * 450000
+
       if taxable <= 450000
         total_tax = 0.01 * taxable
 
-      elsif taxable > 450000
-        base_tax = 0.01* 450000
-        remaining_taxable =  taxable - 450000
-        
-        if remaining_taxable <= 100000
-          tax = 0.1 * remaining_taxable
-          total_tax = base_tax + tax
+      elsif taxable <= 550000
+        total_tax = base_tax + (0.1 * (taxable - 450000))
+      
+      elsif taxable <= 750000
+        total_tax = base_tax + (0.1 * 100000) + (0.2 * (taxable - 550000))
 
-        elsif remaining_taxable <= 300000
-          tax = (0.1 * 100000 ) + (0.2 * remaining_taxable-100000)
-          total_tax = base_tax + tax
+      elsif taxable <= 2000000
+        total_tax = base_tax + (0.1 * 100000) + (0.2 * 200000) + (0.3 * (taxable - 750000))
 
-        elsif remaining_taxable <= 1550000
-          tax = (0.1 * 100000)+(0.2 * 200000)+ (0.3 * (remaining_taxable-300000))
-          total_tax = base_tax + tax
-
-        elsif remaining_taxable <= 2000000
-          tax = (0.1 * 100000)+(0.2 * 200000) + (0.36 * (remaining_taxable-1550000))
-          total_tax = base_tax + tax
-        end
+      elsif taxable > 2000000
+        tax = base_tax + (0.1 * 100000)+(0.2 * 200000) + (0.3 * 1250000) + (0.36 * (taxable - 2000000) )
       end
 
     when "unmarried"
-      if  taxable <= 400000
+      base_tax = 0.01 * 400000
+
+      if taxable <= 400000
         total_tax = 0.01 * taxable
 
-      elsif taxable > 400000
-        base_tax = 0.01* 400000
-        remaining_taxable =  taxable - 400000
-        
-        if remaining_taxable <= 100000
-          tax = 0.1 * remaining_taxable
-          total_tax = base_tax + tax
+      elsif taxable <= 500000
+        total_tax = base_tax + (0.1 * (taxable - 400000))
+      
+      elsif taxable <= 700000
+        total_tax = base_tax + (0.1 * 100000) + (0.2 * (taxable - 500000))
 
-        elsif remaining_taxable <= 300000
-          tax = (0.1 * 100000 ) + (0.2 * remaining_taxable-100000)
-          total_tax = base_tax + tax
+      elsif taxable <= 2000000
+        total_tax = base_tax + (0.1 * 100000) + (0.2 * 200000) + (0.3 * (taxable - 700000))
 
-        elsif remaining_taxable <= 1600000
-          tax = (0.1 * 100000)+(0.2 * 200000)+ (0.3 * (remaining_taxable-300000))
-          total_tax = base_tax + tax
-
-        elsif remaining_taxable <= 2000000
-          tax = (0.1 * 100000)+(0.2 * 200000) + (0.36 * (remaining_taxable-1600000))
-          total_tax = base_tax + tax
-        end
+      elsif taxable > 2000000
+        tax = base_tax + (0.1 * 100000)+(0.2 * 200000) + (0.3 * 1300000) + (0.36 * (taxable - 2000000) )
       end
     end
   end
